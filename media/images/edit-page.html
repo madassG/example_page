@@ -1,0 +1,412 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Edit page' %}{% endblock %}
+{% block content %}
+    <div class="is-admin">
+            <div class="is-admin-sidebar" id="is-admin-sidebar">
+                <div class="is-admin-sidebar__logo"><a class="logo header__logo" href="{% url 'users:head' %}"><img src="/media/images/logo.svg" alt=""></a></div>
+              <div class="is-admin-sidebar__menu"><a class="is-admin-sidebar__menu-item is-admin-sidebar__menu-item_checked" href="{% url 'subscribe_page:page-list' %}">
+                  <div class="is-admin-sidebar__menu-item-image">
+                    <svg class="svg-icon svg-icon__folder">
+                      <use xlink:href="/media/images/folder.svg#folder"></use>
+                    </svg>
+                  </div>{% trans 'My pages' %}</a><a class="is-admin-sidebar__menu-item" href="{% url 'users:balance' %}">
+                  <div class="is-admin-sidebar__menu-item-image">
+                    <svg class="svg-icon svg-icon__money">
+                      <use xlink:href="/media/images/money.svg#money"></use>
+                    </svg>
+                  </div>{% trans 'Balance' %}</a>
+{#                  <a class="is-admin-sidebar__menu-item" href="{% url 'users:rate' %}">#}
+{#                  <div class="is-admin-sidebar__menu-item-image">#}
+{#                    <svg class="svg-icon svg-icon__label">#}
+{#                      <use xlink:href="/media/images/label.svg#label"></use>#}
+{#                    </svg>#}
+{#                  </div>{% trans 'Rates' %}</a>#}
+                  <a class="is-admin-sidebar__menu-item" href="{% url 'users:settings' %}">
+                  <div class="is-admin-sidebar__menu-item-image">
+                    <svg class="svg-icon svg-icon__gear">
+                      <use xlink:href="/media/images/gear.svg#gear"></use>
+                    </svg>
+                  </div>{% trans 'Settings' %}</a>
+<!--              <a class="is-admin-sidebar__menu-item is-admin-sidebar__menu-item_checked" href="{% url 'referral:referral-account' %}"> -->
+<!--              <div class="is-admin-sidebar__menu-item-image"> -->
+<!--                <svg class="svg-icon svg-icon__referral"> -->
+<!--                  <use xlink:href="/media/images/referral.svg#referral"></use> -->
+<!--                </svg> -->
+<!--              </div>{% trans 'Referral system' %}</a> -->
+
+<!--                  <a class="is-admin-sidebar__menu-item" href="{% url 'users:tutorial' %}">-->
+<!--                  <div class="is-admin-sidebar__menu-item-image">-->
+<!--                    <svg class="svg-icon svg-icon__training">-->
+<!--                      <use xlink:href="/media/images/training.svg#training"></use>-->
+<!--                    </svg>-->
+<!--                  </div>{% trans 'Education materials' %}</a>-->
+<a class="is-admin-sidebar__menu-item" href="{% url 'users:domains' %}">
+  <div class="is-admin-sidebar__menu-item-image">
+      <svg class="svg-icon svg-icon__domains-icon">
+          <use xlink:href="/static/images/domains-icon.svg#domains-icon"></use>
+      </svg>
+  </div>
+  Привязка домена 
+</a>
+                  <a target="_blank" class="is-admin-sidebar__menu-item is-admin-sidebar__menu-item_highlighted" href="https://target.instasub.link">
+                      <div class="is-admin-sidebar__menu-item-image">
+                          <img class="is-admin-sidebar__menu-item-icon" src="/media/images/course.png" alt="">
+                      </div>
+                      <div class="is-admin-sidebar__menu-item-highlight"></div>Пройти онлайн-курс</a>
+              </div>
+              <div class="is-admin-sidebar__subscribe">
+                <div class="is-admin-sidebar__subscribe-text">{% trans 'Subscribe to our Instagram and get a promocode for + 10% to balance replenishment' %}</div>
+                <div class="is-admin-sidebar__subscribe-links"><a class="is-admin-sidebar__subscribe-link" href="https://instasub.link/ru/page/10instasub/"><img src="/media/images/instagram-2.png" alt=""></a></div>
+              </div>
+            </div>
+      <div class="is-admin__content">
+        <div class="is-admin-topbar">
+          <div class="is-admin-topbar__hamburger js-sidebar">
+            <svg class="svg-icon svg-icon__hamburger">
+              <use xlink:href="/media/images/hamburger.svg#hamburger"></use>
+            </svg>
+          </div>
+          <form class="js-language is-admin-topbar__language">
+            <input id="language-1" type="radio" name="language" value="Ru" checked="">
+            <label class="is-admin-topbar__language-item" for="language-1">Ru</label>
+            <input id="language-2" type="radio" name="language" value="Eng">
+            <label class="is-admin-topbar__language-item" for="language-2">Eng</label>
+          </form>
+          <div class="is-admin-topbar__balance"><img class="is-admin-topbar__balance-icon" src="/media/images/money-3.png" alt="">{% trans 'Balance' %} <span class="is-admin-topbar__balance-number">{{ request.user.pocket.balance }}</span> Р</div><a class="is-admin-topbar__logout" href="#">Выйти
+            <svg class="svg-icon svg-icon__exit is-admin-topbar__logout-image">
+              <use xlink:href="/media/images/exit.svg#exit"></use>
+            </svg></a>
+        </div>
+        <div class="edit-page">
+          <div class="is-admin__title">{% trans 'Subscribe Pages' %}</div>
+          <div class="edit-page__content">
+            <div class="edit-page__title">{% trans 'Edit page' %}</div>
+            <form class="edit-page__form" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+              <div class="edit-page__image-wrapper">
+                <div class="field__text">Загрузить фото или видео</div>
+                <style>
+                  .btn-wrapper{
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-bottom: 1vw;
+                  }
+                  .btn-wrapper span{
+                    font-size: 1.2rem;
+                    color: #737373;
+                    padding: 0 1vw;
+                  }
+                  .btn-wrapper .btn-wrapper-capital span{
+                    font-size: inherit;
+                    color: inherit;
+                  }
+                  .btn-wrapper .btn-wrapper-capital:hover{
+                    cursor: pointer;
+                  }
+                  .btn-wrapper .btn-wrapper-capital{
+                    width: 16rem;
+                    height: 3rem;
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    background: #fff;
+                    -webkit-box-shadow: 0.83333em 0.83333em 1.66667em rgba(0,0,0,.1);
+                    box-shadow: 0.83333em 0.83333em 1.66667em rgba(0,0,0,.1);
+                    border-radius: .58333em;
+                    border-color: #cdcdcd;
+                    color: #4c67fb;
+                    text-transform: uppercase;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding-top: 0.1rem;
+                    border: 1px solid #4c67fb;
+                    transition: 0.3s ease-in-out;
+                    }
+                    .btn-wrapper .btn-wrapper__img{
+                      
+                    }
+
+                    .video-youtube-poster{
+                      display: flex;  
+                      justify-content: flex-start;
+                      align-items: center;
+                      position: relative;
+                      padding-bottom: 1rem;
+                    }
+                    .video-youtube-poster input{
+                      width: 37rem;
+                      
+                    }
+                    .video-youtube-poster input::placeholder{
+                      text-transform: lowercase;
+                    }
+                    .video-youtube-poster .error-message{
+                      position: absolute;
+                      bottom: -1.2rem;
+                    }
+                    .field-del{
+                      width: 2rem;
+                      margin-left: 1vw;
+                    }
+                    .field-del:hover{
+                      cursor: pointer;
+                    }
+                    .photo-image-poster{
+                      display: flex;
+                      justify-content: flex-start;
+                      align-items: center;
+                    }
+                </style>
+                <!-- кнопки управляющие состоянием полей ниже-->
+                <div class="btn-wrapper" id="btn-wrapper_id">
+                  
+                  <div id="video-youtube" class="btn-wrapper-capital btn-wrapper__youtube">
+                   <span>ссылка на ютуб</span> 
+                  </div>
+                  <span>или</span>
+                  <div id="photo-image" class="btn-wrapper-capital btn-wrapper__img">
+                    <span>картинка</span>  
+                  </div>
+                </div>
+                <!-- отслеживает нажалась ли кнопка youtube(сделано для view)-->
+                <input type="hidden" name='is_youtube' id="is-youtube">
+                
+                <div id="photo-image__poster" class="photo-image-poster no-active-poster" style="transition: 0.3s ease-in-out;">
+                  <div>
+                     <label class="edit-page__image input-image">
+                      {{ form1.page_photo }}
+                                    
+                      <img class="input-image__img" src="/media/images/image.png" alt=""><img class="input-image__file" src="{{ photo }}" alt="">
+                  </label>
+                    {% if form1.page_photo.errors %}
+                      <div class="error-message edit-page-image__error-message">{{ form1.page_photo.errors }}</div>
+                      {% endif %}
+                  </div>
+                  <img class="field-del" src="/media/images/del.png" alt="">
+                </div>
+
+                <div id="video-youtube__poster" class="video-youtube-poster no-active-poster" style="transition: 0.3s ease-in-out;">
+                 
+                      {{ form1.youtube_url }}
+                  <img class="field-del" src="/media/images/del.png" alt="">
+                    {% if form1.youtube_url.errors %}
+                      <div class="error-message edit-page-image__error-message">{{ form1.youtube_url.errors }}</div>
+                    {% endif %}
+                </div>   
+                </div>
+              
+                <div class="edit-page__form-group">
+                  <label class="field">
+                    <div class="field__text">{{ form1.page_name.label }}</div>
+                      {{ form1.page_name }}
+                      {#                    <input class="input" type="text" name="page-name" placeholder="Будет видно только вам">#}
+                      {% if form1.page_name.errors %}
+                        <div class="error-message">{{ form1.page_name.errors }}</div>
+
+                      {% endif %}
+                  </label>
+                  <label class="field">
+                    <div class="field__text">{{ form1.slug.label }}</div>
+                    <div class="input-site">
+                      <div class="input-site__text">www.instasub.link/page/</div>
+                        {{ form1.slug }}
+                    </div>
+                      {% if form1.slug.errors %}
+                        <div class="error-message error-message_margined-top">{{ form1.slug.errors }}</div>
+                      {% endif %}
+                  </label>
+                  <label class="field">
+                    <div class="field__text">{{ form1.title.label }}</div>
+{#                    <input class="input" type="text" name="page-title" placeholder="Напишите интригующий заголовок вашего материала">#}
+                      {{ form1.title }}
+                      {% if form1.title.errors %}
+                        <div class="error-message">{{ form1.title.errors }}</div>
+                      {% endif %}
+                  </label>
+                  <label class="field">
+                    <div class="field__text">{{ form1.description.label }}</div>
+{#                    <textarea class="input" type="text" name="page-desc" placeholder="Расскажите более подробно о вашем материале"></textarea>#}
+                      {{ form1.description }}
+{#                    <div class="error-message">Ошибка. Неверный логин и пароль</div>#}
+                      {% if form1.description.errors %}
+                        <div class="error-message">{{ form1.errors }}</div>
+                      {% endif %}
+                  </label>
+                  <label class="field">
+
+                </div>
+
+              <label class="field">
+                <div class="field__text">{% trans 'Countdown timer' %}</div>
+                <div class="checkbox">
+                  {#<input type="checkbox" name="is-timer-active" value="false">#}
+                  {{ form1.is_timer_active }}
+                  <span class="checkbox__icon">
+                    <svg class="svg-icon svg-icon__checked">
+                      <use xlink:href="/media/images/checked.svg#checked"></use>
+                    </svg>
+                  </span>
+                  <div class="checkbox__text">{% trans 'Enable countdown timer' %}</div>
+                </div>
+              </label>
+              <label class="field edit-page__timer-time">
+                <div class="field__text">{% trans 'Timer time (in seconds)' %}</div>
+                {#<input class="input" type="number" name="timer-time" placeholder="">#}
+                {{ form1.timer_time }}
+              </label>
+
+
+              <label class="field edit-page__pixel">
+                <div class="field__text">{{ form1.facebook_pixel.label }}</div>
+                  {{ form1.facebook_pixel }}
+                  {#                <textarea class="input" type="text" name="page-pixel" placeholder="Введите код пикселя"></textarea>#}
+                  {% if form1.facebook_pixel.errors %}
+                        <div class="error-message">{{ form1.facebook_pixel.errors }}</div>
+                  {% endif %}
+              </label>
+                <label class="field">
+                <div class="field__text">{{ form1.button_text.label }}</div>
+                  {{ form1.button_text }}
+                  {#                <input class="input" type="text" name="page-button-text" placeholder="Текст на кнопке">#}
+                  {% if form1.button_text.errors %}
+                        <div class="error-message">{{ form1.button_text.errors }}</div>
+                  {% endif %}
+              </label>
+              <div class="edit-page__title">{% trans 'Edit success page' %}</div>
+              <label class="field">
+                <div class="field__text">{% trans 'Text get material' %}</div>
+{#                <input class="input" type="text" name="popup-text" placeholder="Напишите благодарность вашему новому подписчику ">#}
+                  {{ form2.title }}
+                  {% if form2.title.errors %}
+                        <div class="error-message">{{ form2.title.errors }}</div>
+                  {% endif %}
+              </label>
+              <label class="field">
+                <div class="field__text">{{ form2.text.label }}</div>
+{#                <textarea class="input" type="text" name="popup-desc" placeholder="Введите описание"></textarea>#}
+                  {{ form2.text }}
+                  {% if form2.text.errors %}
+                        <div class="error-message">{{ form2.text.errors }}</div>
+                  {% endif %}
+              </label>
+              <label class="field">
+                <div class="field__text">{% trans 'Link download' %}</div>
+{#                <input class="input" type="text" name="popup-link" placeholder="Введите ссылку на материал для выдачи">#}
+                  {{ form2.button_url }}
+                  {% if form2.button_url.errors %}
+                        <div class="error-message">{{ form2.button_url.errors }}</div>
+                  {% endif %}
+              </label>
+              <div class="edit-page__buttons">
+                <div class="button-wrapper edit-page__button">
+                    {% if created %}
+                      <button class="button">{% trans 'Edit' %}</button>
+                </div>
+                    <div class="button-wrapper edit-page__button-cancel">
+                      <a href="{% url 'subscribe_page:page-list' %}" class="button">{% trans 'Cancel' %}</a>
+                    </div>
+                        {% else %}
+                      <button onclick="ym(64640806,'reachGoal','create')" class="button">{% trans 'Create' %}</button>
+                </div>
+                    <div class="button-wrapper edit-page__button-cancel">
+                      <a href="{% url 'subscribe_page:page-delete' slug %}" class="button">{% trans 'Cancel' %}</a>
+                    </div>
+                    {% endif %}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <script>
+
+        //объявление переменных нужных для работы скрипта 
+         let video_button = document.getElementById('video-youtube'), photo_image = document.getElementById('photo-image'),
+            video_poster = document.getElementById('video-youtube__poster'), photo_poster = document.getElementById('photo-image__poster'),
+            youtube_check = document.getElementById('is-youtube'), btn_wrapper = document.getElementById('btn-wrapper_id'),
+            field_del = document.querySelectorAll('.field-del')
+
+        //делает элемент активным
+        function active(elem_poster){
+          btn_wrapper.classList.add('active-wrapper')
+          elem_poster.classList.add('active-poster')
+        }
+
+        //очищает "активность" элементов
+        function del(){
+          video_poster.classList.remove('active-poster')
+          photo_poster.classList.remove('active-poster')
+          btn_wrapper.classList.remove('active-wrapper')
+        }
+
+        // возвращает какой именно элемент сейчас является активным у пользователя(ютуб или картинка)
+        function what_is_active(){
+          let img_src =  photo_poster.childNodes[1].childNodes[1].childNodes[4].src;
+          let youtube_url = video_poster.childNodes[1].value;
+          if( ((img_src == '') || (img_src[img_src.length - 1] == '#')) && ((youtube_url == undefined) || (youtube_url == '')) )
+            return 'none'
+          if((img_src == '') || (img_src[img_src.length - 1] == '#'))
+            return 'youtube'
+          if((youtube_url == undefined) || (youtube_url == ''))
+            return 'img'
+        
+        }
+       
+
+        // привязывает событие клик к кнопке удаления 
+        field_del.forEach(element => {
+          console.log(element)
+          element.onclick = () =>{
+            if(element.parentNode.id == 'video-youtube__poster'){
+                video_poster.childNodes[1].value = ''
+              
+            }else{
+              photo_poster.childNodes[1].childNodes[1].childNodes[4].src = '1'
+
+            }
+            del()
+          }
+        });
+        
+        //отслеживание события клик по кнопке
+        video_button.onclick = (e) => {
+          youtube_check.value = "yes"
+            active(video_poster)
+        }
+        photo_image.onclick = (e) => {
+          youtube_check.value = "no"
+          active( photo_poster)
+        }
+        
+        if(what_is_active() == 'youtube'){
+          youtube_check.value = "yes"
+          active(video_poster)
+        }
+
+        if(what_is_active() == 'img'){
+          youtube_check.value = "no"
+          active(photo_poster)
+        }
+        
+     </script>
+     <style>
+       /* .active-file{
+         color: #fff !important;
+         background-color: #4c67fb !important;
+         display: none !important;
+       } */
+       .active-wrapper{
+         display: none !important;
+       }
+       .active-poster{
+         display: flex !important;
+       }
+       .no-active-poster{
+         display: none;
+       }
+     </style>
+{% endblock %}

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" href="/media/images/favicon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        @font-face {
+            font-family: 'Gotham Pro';
+            src: url('/static/fonts/GothamPro-Black.eot');
+            src: local('Gotham Pro Black'), local('/static/fonts/GothamPro-Black'),
+            url('/static/fonts/GothamPro-Black.eot?#iefix') format('embedded-opentype'),
+            url('/static/fonts/GothamPro-Black.woff') format('woff'),
+            url('/static/fonts/GothamPro-Black.ttf') format('truetype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Gotham Pro';
+            src: url('/static/fonts/GothamPro-Bold.eot');
+            src: local('Gotham Pro Bold'), local('/static/fonts/GothamPro-Bold'),
+            url('/static/fonts/GothamPro-Bold.eot?#iefix') format('embedded-opentype'),
+            url('/static/fonts/GothamPro-Bold.woff') format('woff'),
+            url('/static/fonts/GothamPro-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Gotham Pro';
+            src: url('/static/fonts/GothamPro.eot');
+            src: local('Gotham Pro'), local('/static/fonts/GothamPro'),
+                url('/static/fonts/GothamPro.eot?#iefix') format('embedded-opentype'),
+                url('/static/fonts/GothamPro.woff') format('woff'),
+                url('/static/fonts/GothamPro.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Gotham Pro';
+            src: url('/static/fonts/GothamPro-Medium.eot');
+            src: local('Gotham Pro Medium'), local('/static/fonts/GothamPro-Medium'),
+                url('/static/fonts/GothamPro-Medium.eot?#iefix') format('embedded-opentype'),
+                url('/static/fonts/GothamPro-Medium.woff') format('woff'),
+                url('/static/fonts/GothamPro-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Gotham Pro';
+            src: url('/static/fonts/GothamPro-Light.eot');
+            src: local('Gotham Pro Light'), local('/static/fonts/GothamPro-Light'),
+                url('/static/fonts/GothamPro-Light.eot?#iefix') format('embedded-opentype'),
+                url('/static/fonts/GothamPro-Light.woff') format('woff'),
+                url('/static/fonts/GothamPro-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/app.min.css">
+    <title>Заголовок</title>
+    <style>
+        a{
+            text-decoration: none!important;
+        }
+    </style>
+<!-- Carrot quest END -->
+</head>
+<body class="">
+        <div class="is-admin">
+            <div class="is-admin-sidebar" id="is-admin-sidebar"><a class="is-admin-sidebar__logo" href="{% url 'users:head' %}"><img src="/media/images/logo.svg" alt=""></a>
+              <div class="is-admin-sidebar__menu"><a class="is-admin-sidebar__menu-item is-admin-sidebar__menu-item_checked" href="{% url 'subscribe_page:page-list' %}">
+                  <div class="is-admin-sidebar__menu-item-image">
+                    <svg class="svg-icon svg-icon__folder">
+                      <use xlink:href="/media/images/folder.svg#folder"></use>
+                    </svg>
+                  </div>Мои страницы</a><a class="is-admin-sidebar__menu-item" href="{% url 'users:balance' %}">
+                  <div class="is-admin-sidebar__menu-item-image">
+                    <svg class="svg-icon svg-icon__money">
+                      <use xlink:href="/media/images/money.svg#money"></use>
+                    </svg>
+                  </div>Баланс</a>
+                  <a class="is-admin-sidebar__menu-item" href="{% url 'users:settings' %}">
+                  <div class="is-admin-sidebar__menu-item-image">
+                    <svg class="svg-icon svg-icon__gear">
+                      <use xlink:href="/media/images/gear.svg#gear"></use>
+                    </svg>
+                  </div>настройки</a>
+<a class="is-admin-sidebar__menu-item" href="{% url 'users:domains' %}">
+  <div class="is-admin-sidebar__menu-item-image">
+      <svg class="svg-icon svg-icon__domains-icon">
+          <use xlink:href="/static/images/domains-icon.svg#domains-icon"></use>
+      </svg>
+  </div>
+  Привязка домена 
+</a>
+                  <a target="_blank" class="is-admin-sidebar__menu-item is-admin-sidebar__menu-item_highlighted" href="https://target.instasub.link">
+                      <div class="is-admin-sidebar__menu-item-image">
+                          <img class="is-admin-sidebar__menu-item-icon" src="/media/images/course.png" alt="">
+                      </div>
+                      <div class="is-admin-sidebar__menu-item-highlight"></div>Пройти онлайн-курс</a>
+              </div>
+              <div class="is-admin-sidebar__subscribe">
+                <div class="is-admin-sidebar__subscribe-text">Подпишись и получи 10% к чему-то там, я просто привожу страничку к приемлимому виду а тут нужен текст побольше</div>
+                <div class="is-admin-sidebar__subscribe-links"><a class="is-admin-sidebar__subscribe-link" href="https://instasub.link/ru/page/10instasub/"><img src="/media/images/instagram-2.png" alt=""></a></div>
+              </div>
+            </div>
+      <div class="is-admin__content">
+        <div class="is-admin-topbar">
+          <div class="is-admin-topbar__hamburger js-sidebar">
+            <svg class="svg-icon svg-icon__hamburger">
+              <use xlink:href="/media/images/hamburger.svg#hamburger"></use>
+            </svg>
+          </div>
+          <form class="js-language is-admin-topbar__language">
+            <input id="language-1" type="radio" name="language" value="Ru" checked="">
+            <label class="is-admin-topbar__language-item" for="language-1">Ru</label>
+            <input id="language-2" type="radio" name="language" value="Eng">
+            <label class="is-admin-topbar__language-item" for="language-2">Eng</label>
+          </form>
+          <div class="is-admin-topbar__balance">
+            <img class="is-admin-topbar__balance-icon" src="/media/images/money-3.png" alt="">Баланс
+            <span class="is-admin-topbar__balance-number">100 </span>
+            R
+          </div>
+            <a class="is-admin-topbar__logout" href="/logout/">Выйти
+            <svg class="svg-icon svg-icon__exit is-admin-topbar__logout-image">
+              <use xlink:href="/media/images/exit.svg#exit"></use>
+            </svg></a>
+        </div>
+        <div class="my-pages">
+          <div class="is-admin__title">Подписные страницы</div>
+          <div class="my-pages__create">
+            <div class="button-wrapper my-pages__create-button"><a class="button" href="{% url 'subscribe_page:page-create' %}">
+                <svg class="svg-icon svg-icon__plus button__image button__image_svg">
+                  <use xlink:href="/media/images/plus.svg#plus"></use>
+                </svg>Создать страницу</a></div>
+                <div class="my-pages__create-limit"><span class="my-pages__create-limit-number"></span></div>
+          </div>
+          <div class="my-pages__list">
+            <div class="my-pages-card">
+              <div class="my-pages-card__id">ID: 10</div>
+              <div class="my-pages-card__title">Название страницы</div>
+              <div class="my-pages-card__settings">
+                <div class="my-pages-card__group">
+                    <div>
+                  <div class="button-wrapper my-pages-card__button my-pages-card__button-edit"><a class="button" href="{% url 'subscribe_page:page-detail' page.slug %}">
+                      <svg class="svg-icon svg-icon__gear button__image button__image_svg">
+                        <use xlink:href="/media/images/gear.svg#gear"></use>
+                      </svg>Изменить</a></div>
+                  <div class="button-wrapper my-pages-card__button my-pages-card__button-link"><a class="button button_red" target="_blank" href="{% if page.domain %}{{request.scheme}}://{{ page.domain.domain }}{% url 'subscribe_page:page-open' page.slug %}{% else %}{% url 'subscribe_page:page-open' page.slug %}{% endif %}" data-domain="{{ page.domain.domain }}" data-scheme="{{request.scheme}}://">
+                      <svg class="svg-icon svg-icon__exit button__image button__image_svg">
+                        <use xlink:href="/media/images/exit.svg#exit"></use>
+                      </svg>Открыть</a></div>
+                        </div>
+                    <div class="delimeter-div">
+                  <div class="button-wrapper my-pages-card__button my-pages-card__button-stats"><a class="button" target="_blank" href="{% url 'subscribe_page:page-logins' page.slug %}">
+                      <img src="/media/images/logins.png" alt="" class="svg-icon svg-icon__stats button__image button__image_svg">Логины</a></div>
+                  <div class="button-wrapper my-pages-card__button my-pages-card__button-stats"><a class="button" target="_blank" href="{% url 'subscribe_page:page-statistic' page.slug %}">
+                      <svg class="svg-icon svg-icon__stats button__image button__image_svg">
+                        <use xlink:href="/media/images/stats.svg#stats"></use>
+                      </svg>Статистика</a></div><a class="my-pages-card__instagram my-pages-card__instagram-mobile" href="#"><img src="/media/images/instagram.png" alt="">dsadsadasd.dsada</a>
+                </div>
+                </div>
+                <div class="my-pages-card__group">
+                  <div class="my-pages-card__stat">
+                    <div class="my-pages-card__stat-value">20.8%</div>
+                    <div class="my-pages-card__stat-icon"><img src="/media/images/proportion.png" alt=""></div>
+                    <div class="my-pages-card__stat-name">CTR</div>
+                  </div>
+                  <div class="my-pages-card__stat">
+                    <div class="my-pages-card__stat-value">678</div>
+                    <div class="my-pages-card__stat-icon"><img src="/media/images/user.png" alt=""></div>
+                    <div class="my-pages-card__stat-name">Подписались</div>
+                  </div>
+                  <div class="my-pages-card__stat">
+                    <div class="my-pages-card__stat-value">17800</div>
+                    <div class="my-pages-card__stat-icon"><img src="/media/images/eye.png" alt=""></div>
+                    <div class="my-pages-card__stat-name">Просмотров</div>
+                  </div>
+                    <div class="my-pages-card__stat">
+                    <div class="my-pages-card__stat-value"></div>
+                    <div class="my-pages-card__stat-icon"><div style="height: 1rem; width: 1rem; -webkit-border-radius: 100%;-moz-border-radius: 100%;border-radius: 100%; background:#4c67fb;"></div></div>
+                    <div class="my-pages-card__stat-name">Активна</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="my-pages-card__bottombar"> 
+                  <a class="my-pages-card__instagram" href="">
+                      <img src="/media/images/instagram.png" alt="">danys.dsadss
+                  </a>
+                  <a class="my-pages-card__dublicate" href="{% url 'subscribe_page:page-copy' page.slug %}">
+                      <img src="/media/images/duplicate.svg" style="width: 17px; height: 17px; color: #d0d0d0" alt="">Скопировать страницу
+                  </a>
+                  <a class="my-pages-card__copy-link" href="#">
+                      <img src="/media/images/copy.png" alt="">Скопировать ссылку на страницу
+                  </a>
+                  <a class="my-pages-card__remove" href="{% url 'subscribe_page:page-delete' page.slug %}">
+                      <svg class="svg-icon svg-icon__remove">
+                        <use xlink:href="/media/images/remove.svg#remove"></use>
+                      </svg>Удалить
+                  </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<style>
+    .my-pages-card__group:first-child{
+        display: flex;
+    }
+    .delimeter-div{
+        margin-left: 2rem;
+    }
+    @media screen and (max-width:700px){
+        .my-pages-card__group{
+            flex-direction: column;
+        }
+        .delimeter-div{
+        margin-left: 0rem;
+        }
+
+    }
+</style>
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/Chart.bundle.min.js"></script>
+    <script src="/static/js/micromodal.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
